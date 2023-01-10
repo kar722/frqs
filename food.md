@@ -1,49 +1,184 @@
-## Planned Meals
-> The Alpine lodge extra-large kitchen seats 44 people.  The kitchens are perfect for large group meals and all come equipped with appropriate appliances and utensils. There is an outdoor barbecue!  There is a fridge and individual kitchens in the homes.   So there is a place to store snacks, make sure you stock up for the little ones.
 
-1. **Breakfast** will be available at 8am each morning. Families will be able to serve themselves and we ask that you clean up after yourselves as well. Breakfast will close at 9:30 to allow time for clean up before activities begin.
-2.  **Morning Huddle** will be at 9:45am in the dinning hall.  This is a chance to know what the activities are and where you need to be if you are participating.
-3.  **Lunch** will be available at 12pm each day.  Supplies will be available to make your own lunch.  You can dine in the hall or take it with you depending on planned activities.  As always clean up after yourself and your family.  
-4.  **Dinner** will be available at 6pm each evening. It is strongly encouraged to eat in the hall all together so that you do not miss the 7pm Family Night directly afterwards.
-- **NOTE** - The menu for the day will be posted in the dinning hall each morning. Snacks will be left out after lunch and if any remain will be put away when dinner is being prepared.
+<table>
+
+  <tr id="nameRows">
+  </tr>
+
+  <tr id="ageRows">
+  </tr>
+
+  <tr id="emailRows">
+  </tr>
+
+</table>
+
+
+<script>
+
+    function getPeople() {
+
+        // Fetch data from API
+        fetch('https://teamsports.nighthawkcoding.ml/api/person/')
+        .then(response => response.json())
+        .then(data => {
     
-### Monday Dinner - Head Chef Lisa (6 - 7pm)
+            peopleData = data;
+            console.log(peopleData);
+            
+            // get row elements
+            let nameRow = document.getElementById("nameRows");
+            let ageRow = document.getElementById("ageRows");
+            let emailRow = document.getElementById("emailRows");
+            
+            // clear table contents
+            for (let j = 0; j < peopleData.length; j++){    
+
+                nameRow.innerHTML = " ";
+                ageRow.innerHTML = " ";
+                emailRow.innerHTML = " ";
+
+            }
+
+            // add table contents
+            for (let i = 0; i < peopleData.length; i++){  
+
+                let header = document.createElement("th");
+                header.setAttribute("id", i);
+                header.innerHTML = peopleData[i].name;
+                nameRow.appendChild(header);
+
+                let newAgeRow = document.createElement("td");
+                newAgeRow.setAttribute("id", i);
+                newAgeRow.innerHTML = peopleData[i].age + " Years Old";
+                ageRow.appendChild(newAgeRow);
 
 
- 
-### Tuesday Breakfast (8-9:30am)
-> Grits and Sausage Links in the main hall
+                let newEmailRow = document.createElement("td");
+                newEmailRow.setAttribute("id", i);
+                newEmailRow.innerHTML = peopleData[i].email;
+                emailRow.appendChild(newEmailRow);  
+            }
 
-### Tuesday Lunch
-> Make lunch in the dinning hall.  Pack and Go.  Eat outside or at your housing, pick up trash and leave no mess in dinning hall or grounds.
+        });
 
-### Tuesday Dinner - Head Chef Sherri (6-7pm)
+}
+
+function getInputId(){
+    let input = document.getElementById("inputId").value;
+    console.log(input);
+    return input;
+}
+
+function getInputEmail(){
+    let input = document.getElementById("inputEmail").value;
+    console.log(input);
+    return input;
+}
+
+function getInputPassword(){
+    let input = document.getElementById("inputPassword").value;
+    console.log(input);
+    return input;
+}
+
+function getInputName(){
+    let input = document.getElementById("inputName").value;
+    console.log(input);
+    return input;
+}
+
+function getInputDob(){
+    let input = document.getElementById("inputDob").value;
+    console.log(input);
+    return input;
+}
+
+function getInputAge(){
+    let input = document.getElementById("inputAge").value;
+    console.log(input);
+    return input;
+}
+
+function getInputNationality(){
+    let input = document.getElementById("inputNationality").value;
+    console.log(input);
+    return input;
+}
 
 
-### Wednesday Breakfast (8-9:30am)
+function addPeople(){
+    
+    const params = {
+        email: getInputEmail(),
+        password: getInputPassword(), 
+        name: getInputName(),
+        dob: getInputDob(),
+        age: getInputAge(),
+        nationality: getInputNationality(),
 
-### Wednesday Lunch
-> Make lunch in the dinning hall.  Pack and Go.  Leave no mess please.  There is option to purchase food at the caverns, there is a picnic area at the site.
+    };
+
+    const options = {
+        method: 'POST',
+        body: JSON.stringify( params )  
+    };
+
+    fetch( 'https://teamsports.nighthawkcoding.ml/api/person/post/', options )
+        .then(response => response.json())
+        .then(data => {console.log(data);});
+
+}
+
+function getId(id) {
+    idResult = document.getElementById("idResult");
+
+    if(id < 19){
+        idResult.innerHTML = "Invalid ID. Person 0 has an ID of 19.";
+    }
+    // Fetch data from API
+    fetch('https://teamsports.nighthawkcoding.ml/api/person/' + id)
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        idResult.innerHTML = "Person: " + data.name;
+    })
+}
+
+</script>
+
+<button onclick="getPeople()">Click To Update People Table</button>
+
+<br>
+
+### Get Person by ID
+
+<p id="idResult"></p>
+
+<input id="inputId" placeholder="Input Id">
+    <button onclick="getId(getInputId())">Get Person by ID</button>
+
+<br>
+
+### Create New Person
+
+<input id="inputEmail" placeholder="Input Email">
 
 
-### Wednesday Dinner - Head Chef Angela (6-7pm)
+<input id="inputPassword" placeholder="Input Password">
 
 
-### Thursday Breakfast (8-9:30am)
-
-### Thursday Lunch
-> Make lunch in the dinning hall.  Pack and Go.  Leave no mess please.  There will likely be some down time and extra snacks will be wanted while boating.
-
-### Thursday Dinner - Head Chef Jared/Jeremiah (6-7pm)
+<input id="inputName" placeholder="Input Name">
 
 
-### Friday Breakfast (8-9:30am)
-
-### Friday Lunch
-> Make lunch in the dinning hall.  Pack and Go.  There are lots of places to explore and eat in the community of Shasta Lakes and Redding.
-
-### Friday Dinner - Head Chef John (6-7pm)
+<input id="inputDob" placeholder="MM-dd-yyyy">
 
 
-### Saturday Breakfast (8-9:30am)
+<input id="inputAge" placeholder="Input Age">
 
+
+<input id="inputNationality" placeholder="Input Nationality">
+
+
+<button onclick="addPeople()">Submit New Person</button>
+
+    
