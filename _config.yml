@@ -1,5 +1,5 @@
-theme: minima
+theme: jekyll-theme-midnight
 title: "TeamSports FRQs"
 description: "frqs 1-4 frontend"
-gitorg: "https://github.com/jm1021/leuck_reunion"
+gitorg: "https://github.com/kar722/frqs"
 google_analytics:
