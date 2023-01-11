@@ -9,6 +9,8 @@
 
   <tr id="emailRows">
   </tr>
+  <tr id="nationalityRows">
+  </tr>
 
 </table>
 
@@ -29,6 +31,7 @@
             let nameRow = document.getElementById("nameRows");
             let ageRow = document.getElementById("ageRows");
             let emailRow = document.getElementById("emailRows");
+            let nationalityRow = document.getElementById("nationalityRows");
             
             // clear table contents
             for (let j = 0; j < peopleData.length; j++){    
@@ -132,8 +135,8 @@ function addPeople(){
 function getId(id) {
     idResult = document.getElementById("idResult");
 
-    if(id < 19){
-        idResult.innerHTML = "Invalid ID. Person 0 has an ID of 19.";
+    if(id < 35){
+        idResult.innerHTML = "ID cannot be less than 35.";
     }
     // Fetch data from API
     fetch('https://teamsports.nighthawkcoding.ml/api/person/' + id)
