@@ -39,6 +39,7 @@
                 nameRow.innerHTML = " ";
                 ageRow.innerHTML = " ";
                 emailRow.innerHTML = " ";
+                nationalityRow.innerHTML = " ";
 
             }
 
@@ -60,6 +61,11 @@
                 newEmailRow.setAttribute("id", i);
                 newEmailRow.innerHTML = peopleData[i].email;
                 emailRow.appendChild(newEmailRow);  
+
+                let newNationalityRow = document.createElement("td");
+                newNationalityRow.setAttribute("id", i);
+                newNationalityRow.innerHTML = peopleData[i].nationality;
+                nationalityRow.appendChild(newNationalityRow);  
             }
 
         });
